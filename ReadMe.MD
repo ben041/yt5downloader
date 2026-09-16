@@ -65,7 +65,7 @@ If the command is not found, install FFmpeg for your operating system and make s
 Clone the repository:
 
 ```bash
-git clone https://github.com/ben041/yt5downloaderlink.git
+git clone https://github.com/ben041/yt5downloader.git
 ```
 
 Enter the project directory:
@@ -326,11 +326,7 @@ Avoid posting private URLs, authentication tokens, cookies, or other sensitive i
 
 ## License
 
-Choose and add a license before making the repository public.
-
-For example, if you want a permissive open-source license, you could use the MIT License.
-
-See GitHub's documentation on choosing an open-source license:
+MIT
 
 https://docs.github.com/en/communities/setting-up-your-project-for-open-source-contribution/adding-a-license-to-a-repository
 
