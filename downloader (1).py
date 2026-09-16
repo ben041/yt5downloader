@@ -2,13 +2,13 @@ import os
 import sys
 
 
-def play_video(filepath): #tikupanga zot tipange play the downloded video
-    abs_path = os.path.abspath(filepath) #filepath of our video
+def play_video(filepath):  # tikupanga zot tipange play the downloded video
+    abs_path = os.path.abspath(filepath)  # filepath of our video
     print(f"Opening Video: {abs_path}")
 
-    if sys.platform == "win32": #checking window os
+    if sys.platform == "win32":  # checking window os
         os.startfile(abs_path)
-    
+
     elif sys.platform == "darwin":
         os.system(f"open '{abs_path}'")
 
@@ -18,6 +18,7 @@ def play_video(filepath): #tikupanga zot tipange play the downloded video
                 os.system(f"{player} '{abs_path}' &")
                 return
         print("no suitable player found in your system !!!")
+
 
 def download_video(url, output_name="downloaded_video", output_dir=".", autoplay=True):
     try:
@@ -29,15 +30,28 @@ def download_video(url, output_name="downloaded_video", output_dir=".", autoplay
     output_template = os.path.join(output_dir, f"{output_name}.%(ext)s")
     ydl_opts = {
         'outtmpl': output_template,
-        'format': 'best',
+        'format': 'bestvideo+bestaudio/best',
+        'merge_output_format': 'mp4',
         'progress_hooks': [hook],
-
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['ios', 'android', 'web'],
+            }
+        },
     }
     print(f"fetching url(kuitapa link):{url}\n")
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
         ext = info.get('ext', 'mp4')
         final_file = os.path.join(output_dir, f"{output_name}.{ext}")
+
+        # merge_output_format forces mp4 when video+audio are merged,
+        # so fall back to that if the reported ext doesn't match an existing file
+        if not os.path.exists(final_file):
+            fallback_file = os.path.join(output_dir, f"{output_name}.mp4")
+            if os.path.exists(fallback_file):
+                final_file = fallback_file
+
         print(f"Video downloaded successfully: {final_file}")
 
         if autoplay:
@@ -48,6 +62,7 @@ def download_video(url, output_name="downloaded_video", output_dir=".", autoplay
             "ext": ext,
             "filepath": os.path.abspath(final_file),
         }
+
 
 def hook(d):
     if d["status"] == "downloading":
