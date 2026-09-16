@@ -71,7 +71,7 @@ git clone https://github.com/ben041/yt5downloader.git
 Enter the project directory:
 
 ```bash
-cd yt5downloaderlink
+cd yt5downloader
 ```
 
 Install the Python dependency:
@@ -91,13 +91,13 @@ pip install -r requirements.txt
 Run the script:
 
 ```bash
-python your_script.py
+python downloader.py
 ```
 
 On some systems:
 
 ```bash
-python3 your_script.py
+python3 downloader.py
 ```
 
 The program will ask for two values:
