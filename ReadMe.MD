@@ -326,9 +326,7 @@ Avoid posting private URLs, authentication tokens, cookies, or other sensitive i
 
 ## License
 
-MIT
-
-https://docs.github.com/en/communities/setting-up-your-project-for-open-source-contribution/adding-a-license-to-a-repository
+MIT License
 
 ---
 
